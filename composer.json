@@ -1,0 +1,24 @@
+{
+    "name": "varishop/tienda-online",
+    "description": "Creacion de una tienda online",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+        "name": "Edilson Mirllan Suarez Gutierez",
+        "email": "Edilsonmirllan038@gmail.com"
+        },
+        {
+            "name": "Juan Camilo Barragan Pottes",
+            "email": "juancamilobarragan2@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Varishop\\":"src/"
+        }
+    }
+}
