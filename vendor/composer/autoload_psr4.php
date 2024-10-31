@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Varishop\\' => array($baseDir . '/src'),
+    'varishop\\' => array($baseDir . '/src'),
 );

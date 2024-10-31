@@ -68,7 +68,7 @@ require 'funciones.php';
             <div class="col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                    <h1 class="text-center titulo-pelicula"><?php print $item['titulo'] ?></h1>  
+                    <h1 class="text-center Nombre-zapato"><?php print $item['Nombre'] ?></h1>  
                     </div>
                     <div class="panel-body">
                     <?php
