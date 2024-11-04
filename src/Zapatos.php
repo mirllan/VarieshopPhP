@@ -34,7 +34,7 @@ class Zapatos {
 
     // Método para actualizar un zapato existente
     public function actualizar($_params) {
-        $sql = "UPDATE `zapato` SET `Nombre` = :Nombre, `Marca` = :Marca, `Talla` = :Talla, `Foto` = :Foto, `Precio` = :Precio, `Categoria_id` = :Categoria_id, `Fecha` = :Fecha WHERE `Id` = :Id";
+        $sql = "UPDATE zapato SET Nombre = :Nombre, Marca = :Marca, Talla = :Talla, Foto = :Foto, Precio = :Precio, Categoria_id = :Categoria_id, Fecha = :Fecha WHERE Id = :Id";
         
         $resultado = $this->cn->prepare($sql);
 
@@ -51,6 +51,7 @@ class Zapatos {
 
         return $resultado->execute($_array);
     }
+    
 
     // Método para eliminar un zapato
     public function eliminar($Id) {

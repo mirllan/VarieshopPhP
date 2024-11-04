@@ -71,28 +71,34 @@ if (isset($_GET['Id']) && is_numeric($_GET['Id'])) {
                             </div>
                             <div class="form-group">
                                 <label>Talla</label>
-                                <input value="<?php print $resultado['Nombre'] ?>" type="number" class="form-control" name="Talla" placeholder="Ingrese la talla del zapato" required>
+                                <input value="<?php print $resultado['Talla'] ?>" type="number" class="form-control" name="Talla" placeholder="Ingrese la talla del zapato" required>
                             </div>
+                            <div class="form-group">
+                                <label>Marca</label>
+                                <input value="<?php print $resultado['Marca'] ?>" type="text" class="form-control" name="Marca" placeholder="Ingrese la marca del zapato" required>
+                            </div>
+                            
                             <div class="form-group">
                                 <label>Características</label>
                                 <select class="form-control" name="Categoria_id" required>
-                                    <option value="">---Seleccione---</option>
-                                    <option value="">---Seleccione2---</option>
-                                    <option value="">---Seleccione3---</option>
+                                <option value="1">Zapatos formales</option>
+                                <option value="2">Tenis deportivos</option>
+                                <option value="3">Zapatos casuales</option>
                                     <!-- Opciones adicionales aquí -->
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Foto</label>
-                                <input type="file" class="form-control" name="Foto" required>
+                                <input type="file" class="form-control" name="Foto">
+                                <input type="hidden" name="foto_temp" value="<?php print $resultado['Foto'] ?>">
                             </div>
                             <div>
                                 <div class="form-group">
                                     <label>Precio</label>
-                                    <input type="text" class="form-control" name="Precio" placeholder="0.000 COP" required>
+                                    <input  value="<?php print $resultado['Precio'] ?>" type="text" class="form-control" name="Precio" placeholder="0.000 COP" required>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <input type="submit" class="btn btn-primary" name="accion"value= "Actualizar">
                             <a href="index.php" class="btn btn-primary">Cancelar</a>
                         </form>
                     </fieldset>
