@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $rpt = $zapatos->registrar($_params);
 
-        // Función que se encarga de mostrar el tipo de dato y la longitud
+        // funcion que se encarga de mostrar el dato y la longitud el mismo
         if($rpt)
         header('Location: zapato/index.php');
         else
@@ -42,30 +42,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'Precio' => $_POST['Precio'],
             'Categoria_id' => $_POST['Categoria_id'],
             'Fecha' => date('Y-m-d'),
-            'Id' => $_POST['Id'] // Asegúrate de que este es un valor válido
+            'Id' => $_POST['Id'] 
         );
     
-        // Revisar si hay una nueva foto
+        // esto revisa si hay una nueva foto
         if (!empty($_FILES['Foto']['name'])) {
             $_params['Foto'] = subirFoto();
         } else {
             $_params['Foto'] = $_POST['foto_temp'];
         }
     
-        // Llamar al método de actualización
-        $rpt = $zapatos->actualizar($_params); // Cambia a 'actualizar'
+        // aqui llamamos al método de actualización
+        $rpt = $zapatos->actualizar($_params); 
         if ($rpt) {
             header('Location: zapato/index.php');
-            exit; // Asegúrate de usar exit después de header
+            exit; 
         } else {
+            //esto se imprime si hay algun error
             print 'Error al actualizar el artículo';
-            // Puedes imprimir más información de error aquí
+            
         }
     }
 
 }
 
-#Funcion que guarda las fotos en upload
+#funcion que guarda las fotos en la carpeta upload
 function subirFoto() {
     $carpeta = __DIR__.'../../upload/';
 
