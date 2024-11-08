@@ -85,13 +85,10 @@ use varishop\Zapatos; // Simplifica el acceso a la clase Zapatos
           ?>
           </div>
           <div class="panel-footer">
-          <a href="agregar_al_carrito.php?id=<?php print $item['Id'] ?>" class="btn btn-success btn-block">
-            <span class="glyphicon glyphicon-shopping-cart"></span>
-            Agregar al carrito
-          </a>
-
+            <a href="agregar_al_carrito.php?id=<?php echo $item['Id']; ?>&nombre=<?php echo urlencode($item['Nombre']); ?>&precio=<?php echo $item['Precio']; ?>" class="btn btn-success btn-block">
+              <span class="glyphicon glyphicon-shopping-cart"></span> Agregar al carrito
+            </a>
           </div>
-
       </div>
       <?php
         }

@@ -36,7 +36,7 @@ if (!is_array($carrito)) {
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right">
-                    <li class="active"><a href="../pedidos/index.php" class="btn">Pedidos</a></li>
+                    <li class="active"><a href="carrito.php" class="btn">Pedidos</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -53,36 +53,49 @@ if (!is_array($carrito)) {
         <h1>Carrito de Compras</h1>
         
         <?php if (count($carrito) > 0): ?>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($carrito as $item): ?>
+            <form action="actualizar_carrito.php" method="POST">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td><?php echo $item['Nombre']; ?></td>
-                            <td><?php echo isset($item['Cantidad']) ? $item['Cantidad'] : 1; ?></td>
-                            <td><?php echo $item['Precio']; ?></td>
-                            <td><?php echo isset($item['Cantidad']) ? $item['Cantidad'] * $item['Precio'] : $item['Precio']; ?></td>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $totalGeneral = 0;
+                        foreach ($carrito as $id => $item): 
+                            $cantidad = isset($item['Cantidad']) ? $item['Cantidad'] : 1;
+                            $subtotal = $cantidad * $item['Precio'];
+                            $totalGeneral += $subtotal;
+                        ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($item['Nombre']); ?></td>
+                                <td>
+                                    <input type="number" name="cantidades[<?php echo $id; ?>]" value="<?php echo $cantidad; ?>" min="1" style="width: 60px;">
+                                </td>
+                                <td>$<?php echo number_format($item['Precio'], 2); ?>0 COP</td>
+                                <td>$<?php echo number_format($subtotal, 2); ?>0 COP</td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
 
-            <!-- Botones de acción -->
-<!-- Botón de acción "Comprar" -->
-    <div class="text-center">
-        <form action="procesar_compra.php" method="POST">
-            <button type="submit" class="btn btn-primary">Comprar</button>
-        </form>
-        <button onclick="window.location.href='index.php'" class="btn btn-default">Seguir Comprando</button>
-    </div>
+                <h3>Total de la Compra: $<?php echo number_format($totalGeneral, 2); ?>0 COP</h3>
 
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Actualizar Carrito</button>
+                    <a href="index.php" class="btn btn-default">Seguir Comprando</a>
+                </div>
+            </form>
+
+            <form action="procesar_compra.php" method="POST" style="margin-top: 10px;">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Comprar</button>
+                </div>
+            </form>
             
         <?php else: ?>
             <p class="text-center">El carrito está vacío.</p>
