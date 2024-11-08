@@ -61,6 +61,7 @@ if (!is_array($carrito)) {
                             <th>Cantidad</th>
                             <th>Precio</th>
                             <th>Subtotal</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,6 +79,9 @@ if (!is_array($carrito)) {
                                 </td>
                                 <td>$<?php echo number_format($item['Precio'], 2); ?>0 COP</td>
                                 <td>$<?php echo number_format($subtotal, 2); ?>0 COP</td>
+                                <td>
+                                    <a href="eliminar_producto.php?id=<?php echo $id; ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
