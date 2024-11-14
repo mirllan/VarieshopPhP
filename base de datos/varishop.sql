@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2024 a las 22:40:43
+-- Tiempo de generación: 14-11-2024 a las 20:01:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -51,10 +51,21 @@ CREATE TABLE `cliente` (
   `Id` int(11) NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Apellidos` varchar(100) NOT NULL,
+  `Contrasenia` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Telefono` varchar(10) NOT NULL,
-  `Comentario` varchar(300) NOT NULL
+  `Direccion` varchar(300) NOT NULL,
+  `rol` varchar(10) NOT NULL DEFAULT 'cliente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`Id`, `Nombre`, `Apellidos`, `Contrasenia`, `Email`, `Telefono`, `Direccion`, `rol`) VALUES
+(4, 'pruebacliente', 'prueba', '1234', 'prueba@gmail.com', '321321321', 'cras312#312ewq', 'cliente'),
+(7, 'mirllan2', 'mirllan2', '1234', 'mirllan2@gmail.com', '321321321', 'Carrera 85d #42-23', 'cliente'),
+(10, 'adminprueba', 'adminprueba', '12345', 'adminprueba@gmail.com', '321312312', '321dsacxzdsa', 'admin');
 
 -- --------------------------------------------------------
 
@@ -98,6 +109,13 @@ CREATE TABLE `usuarios` (
   `Estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`Id`, `Nombre_usuario`, `Clave`, `Estado`) VALUES
+(1, 'adminMirllan', '12345', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -123,7 +141,8 @@ CREATE TABLE `zapato` (
 INSERT INTO `zapato` (`Id`, `Nombre`, `Marca`, `Talla`, `Foto`, `Precio`, `Categoria_id`, `Fecha`, `Estado`) VALUES
 (1, 'Nike Zoom Vomero 5', 'NIke', '40', 'NIKE+ZOOM+VOMERO+5.jpeg', 300, 1, '2024-11-01', 1),
 (2, 'OzweegoSegundopar', 'Addidas', '42', 'shopping.webp', 150, 2, '2024-10-31', 1),
-(3, 'Addidas Lego', 'Addidas', '40', 'lego.png', 200, 1, '2024-11-06', 1);
+(3, 'Addidas Lego', 'Addidas', '40', 'lego.png', 200, 1, '2024-11-06', 1),
+(5, 'Newbalance 550', 'Newbalance', '42', '1731610703-001512172_101.avif', 300, 2, '2024-11-14', 1);
 
 --
 -- Índices para tablas volcadas
@@ -179,7 +198,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedidos`
@@ -197,13 +216,13 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `zapato`
 --
 ALTER TABLE `zapato`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

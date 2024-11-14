@@ -30,22 +30,24 @@ require 'funciones.php';
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../dashboard.php">Varishop</a>
+                <a class="navbar-brand" href="index.php">Varishop</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right">
-                    <li>
-                        <a href="../pedidos/index.php" class="btn">Pedidos</a>
-                    </li>
+                    <!-- AQUI VA  EL APARTADO DE LOS PEDIDOS PARA EL FUTURO-->
                     <li class="active">
                         <a href="index.php" class="btn">Zapatos</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Salir</a></li>
-                        </ul>
-                    </li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Admin<span class="caret"></span>
+                        </a>
+                    <ul class="dropdown-menu">
+                    <!-- Enlace para hacer logout y redirigir al login -->
+                    <li><a href="../logout.php">Salir</a></li>
+                    </ul>
+                </li>
+
                 </ul>
             </div>
         </div>
@@ -110,7 +112,7 @@ require 'funciones.php';
                                 ?>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a href="form_eliminar.php?Id=<?php echo $item['Id']; ?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
                                     <a href="form_actualizar.php?Id=<?php print $item['Id'] ?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
                                 </td>
                             </tr>

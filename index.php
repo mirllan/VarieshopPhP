@@ -42,12 +42,15 @@ use varishop\Zapatos; // Simplifica el acceso a la clase Zapatos
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav pull-right">
         <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Salir</a></li>
-                </ul>
-            </li>
-          <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            User<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- Enlace para hacer logout y redirigir al login -->
+            <li><a href="panel/logout.php">Salir</a></li>
+          </ul>
+        </li>
+
             <a href="carrito.php" class="btn">CARRITO <span class="badge"><?php print cantidadZapatos(); ?></span></a>
           </li> 
         </ul>
