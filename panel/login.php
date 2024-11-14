@@ -1,8 +1,40 @@
 <?php
 session_start();
-// Si no ha iniciado sesión, muestra la página de inicio de sesión
 require 'funciones.php';
-require '../vendor/autoload.php';
+
+$error = false; // Variable para indicar si hay un error
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['Email'];
+    $password = $_POST['Contrasenia'];
+
+    // Conexión a la base de datos
+    $conn = new PDO("mysql:host=localhost;dbname=varishop", "root", "");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Verificar si el usuario existe
+    $stmt = $conn->prepare("SELECT * FROM cliente WHERE Email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && $password == $user['Contrasenia']) { // Comparación directa de contraseñas
+        // Iniciar sesión y guardar datos del usuario en sesión
+        $_SESSION['user_id'] = $user['id']; // Cambia 'id' por el nombre real de la columna de ID en tu tabla
+        $_SESSION['user_nombre'] = $user['Nombre'];
+        $_SESSION['user_rol'] = $user['rol']; // Guardamos el rol del usuario
+
+        // Redirigir dependiendo del rol
+        if ($user['rol'] == 'admin') {
+            header("Location: zapato/index.php");// Redirige a la página de administradores
+        } else {
+            header("Location: ../index.php"); // Redirige a la página de clientes
+        }
+        exit();
+    } else {
+        $error = true; // Si las credenciales son incorrectas, activar el error
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,12 +61,6 @@ require '../vendor/autoload.php';
             </div>
         </div>
     </nav>
-    <?php if (isset($_GET['error'])): ?>
-        <div class="alert alert-danger text-center">
-            Usuario o contraseña incorrectos. Por favor intenta de nuevo.
-        </div>
-    <?php endif; ?>
-
 
     <!-- Formulario de inicio de sesión -->
     <div class="container" id="main">
@@ -49,15 +75,21 @@ require '../vendor/autoload.php';
                             <img src="../assets/imagenes/logoVarishop.png" alt="Logo de Varishop" width="150" height="150">
                         </p>
                         <div class="form-group">
-                            <label for="email">Correo Electrónico</label>
-                            <input type="text" class="form-control" name="Email" placeholder="Correo Electrónico" required>
+                            <label for="nombre_usuario">Usuario</label>
+                            <input type="text" class="form-control" name="Email" placeholder="Correo electrónico" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Contraseña</label>
                             <input type="password" class="form-control" name="Contrasenia" placeholder="Contraseña" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                        
+
+                        <?php if ($error): ?>
+                            <div class="alert alert-danger text-center" style="margin-top: 15px;">
+                                <strong>Error:</strong> Email o contraseña incorrectos. Por favor intenta de nuevo.
+                            </div>
+                        <?php endif; ?>
+
                         <div class="text-center" style="margin-top: 10px;">
                             <a href="registro.php" class="btn btn-link">¿No tienes cuenta aún?</a>
                         </div>

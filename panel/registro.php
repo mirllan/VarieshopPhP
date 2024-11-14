@@ -26,32 +26,41 @@ require '../vendor/autoload.php';
 
     <div class="container" id="main">
         <div class="main-login">
-            <form action="procesar_registro.php" method="post">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="text-center">Crea tu Cuenta</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label for="Nombre">Nombre</label>
-                            <input type="text" class="form-control" name="Nombre" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Apellidos">Apellidos</label>
-                            <input type="text" class="form-control" name="Apellidos" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Email">Email</label>
-                            <input type="email" class="form-control" name="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Telefono">Teléfono</label>
-                            <input type="text" class="form-control" name="Telefono" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Registrar</button>
-                    </div>
-                </div>
-            </form>
+        <form action="procesar_registro.php" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="text-center">Crea tu Cuenta</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="Nombre">Nombre</label>
+                <input type="text" class="form-control" name="Nombre" required>
+        </div>
+            <div class="form-group">
+                <label for="Apellidos">Apellidos</label>
+                <input type="text" class="form-control" name="Apellidos" required>
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" name="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="Telefono">Teléfono</label>
+                <input type="text" class="form-control" name="Telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="Direccion">Direccion</label>
+                <input type="text" class="form-control" name="Direccion" required>
+            </div>
+            <div class="form-group">
+                <label for="Contrasenia">Contraseña</label>
+                <input type="password" class="form-control" name="Contrasenia" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+        </div>
+    </div>
+    </form>
         </div>
     </div>
 

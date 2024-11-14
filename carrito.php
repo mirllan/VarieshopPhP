@@ -38,9 +38,12 @@ if (!is_array($carrito)) {
                 <ul class="nav navbar-nav pull-right">
                     <li class="active"><a href="carrito.php" class="btn">Pedidos</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Admin<span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Salir</a></li>
+                            <!-- Enlace para hacer logout y redirigir al login -->
+                            <li><a href="panel/logout.php">Salir</a></li>
                         </ul>
                     </li>
                 </ul>

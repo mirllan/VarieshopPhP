@@ -48,11 +48,15 @@ if (isset($_GET['Id']) && is_numeric($_GET['Id'])) {
                         <a href="../zapato/index.php" class="btn">Zapatos</a>
                     </li> 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Salir</a></li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Admin<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- Enlace para hacer logout y redirigir al login -->
+                            <li><a href="../logout.php">Salir</a></li>
+                        </ul>
                     </li>
-                </ul>
+
             </div><!--/.nav-collapse -->
         </div>
     </nav>
