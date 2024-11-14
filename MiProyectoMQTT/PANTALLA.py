@@ -1,50 +1,66 @@
 import paho.mqtt.client as mqttClient
+import mysql.connector
 import time
 
+# Funciones de MQTT
 def on_connect(client, userdata, flags, rc):
-
     if rc == 0:
-
         print("Connected to broker")
-
-        global Connected                #Use global variable
-        Connected = True                #Signal connection
-
+        global Connected
+        Connected = True
     else:
-
         print("Connection failed")
 
 def on_message(client, userdata, message):
-    print ("Message received: "  + str(message.payload))
+    print("Message received: " + str(message.payload))
 
-Connected = False   #global variable for the state of the connection
-
-
+# Configuración de MQTT
+Connected = False
 client = mqttClient.Client()
-client.on_connect= on_connect                      #attach function to callback
-client.on_message= on_message                      #attach function to callback
-
+client.on_connect = on_connect
+client.on_message = on_message
 client.connect("broker.mqtt.cool", 1883, 60)
+client.loop_start()
 
-client.loop_start()        #start the loop
+# Configuración de la conexión a la base de datos
+db = mysql.connector.connect(
+    host="localhost",
+    user="juan",
+    password="1234",
+    database="varishop",
+    use_pure=True  
+)
 
-while Connected != True:    #Wait for connection
-    time.sleep(0.1)
+cursor = db.cursor()
 
-client.subscribe("acknowledge")
-
-user=''
-product=''
+# Variables para comparar y detectar nuevos usuarios
+ultimo_usuario = None  # Usamos una variable para almacenar el último usuario procesado
 
 try:
     while True:
-        user=input("ingrese un usuario: ")
-        client.publish("user", user, qos=1)
-        product=input("ingrese un producto: ")
-        client.publish("product", product, qos=1)
-        time.sleep(1)
+        # Consulta la columna "Nombre_usuario" de la tabla "usuarios"
+        cursor.execute("SELECT Nombre_usuario FROM usuarios ORDER BY id DESC LIMIT 1")
+        resultado = cursor.fetchone()
+        
+        if resultado:
+            usuario_actual = resultado[0]
+            
+            # Verifica si el usuario actual es diferente al último usuario procesado
+            if usuario_actual != ultimo_usuario:
+                print(f"Nuevo usuario detectado: {usuario_actual}")
+                
+                # Envía un mensaje MQTT con el nuevo usuario
+                client.publish("user", usuario_actual, qos=1)
+                
+                # Actualiza el último usuario procesado
+                ultimo_usuario = usuario_actual
+        
+        # Espera unos segundos antes de volver a consultar
+        time.sleep(5)
 
 except KeyboardInterrupt:
-    print ("exiting")
+    print("Exiting")
     client.disconnect()
     client.loop_stop()
+    cursor.close()
+    db.close()
